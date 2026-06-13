@@ -1,0 +1,76 @@
+# nom-ui
+
+Shared [shadcn-vue](https://www.shadcn-vue.com/) component library for NoM apps — Vue 3 (Composition API) + Tailwind CSS 4.
+
+This package is **distributed as source** (`.vue` / `.ts`). Your app's bundler compiles it, so a Vue-aware build setup (Vite + `@vitejs/plugin-vue`) and Tailwind CSS 4 are required. There is no pre-built `dist`.
+
+## Install
+
+```bash
+npm install nom-ui
+```
+
+`vue` (`^3.4.0`) is a peer dependency — your app provides it. The component runtime deps (`reka-ui`, `lucide-vue-next`, `vue-sonner`, `@vueuse/core`, `class-variance-authority`, `clsx`, `tailwind-merge`) are pulled in automatically.
+
+## Setup
+
+Two lines in your app's main Tailwind CSS entry:
+
+```css
+/* src/style.css */
+@import "tailwindcss";
+
+/* 1. Theme variables + base styles (colors, radius, sonner styles) */
+@import "nom-ui/style.css";
+
+/* 2. Let Tailwind scan the library source so the utility classes
+      the components use are generated into your build. */
+@source "../node_modules/nom-ui/src";
+```
+
+> The `@source` path is relative to the CSS file. Adjust the `../` depth if your
+> entry CSS lives somewhere other than `src/`.
+
+That's all the build config needed — Tailwind 4's Vite plugin handles the rest. No `tailwind.config.js` is required.
+
+## Usage
+
+Import components and composables from the package root:
+
+```vue
+<script setup lang="ts">
+import { Button, Card, CardHeader, CardTitle, CardContent, Input } from 'nom-ui'
+import { useTheme, useToast } from 'nom-ui'
+
+const { toggleTheme } = useTheme()
+const { toast } = useToast()
+</script>
+
+<template>
+  <Card>
+    <CardHeader>
+      <CardTitle>Hello</CardTitle>
+    </CardHeader>
+    <CardContent>
+      <Input placeholder="Type…" />
+      <Button @click="toast('Saved')">Save</Button>
+    </CardContent>
+  </Card>
+</template>
+```
+
+### Exports
+
+| Subpath | Contents |
+| --- | --- |
+| `nom-ui` | All components + composables + `cn` (the barrel; use this for normal imports) |
+| `nom-ui/components` | Components only |
+| `nom-ui/composables` | `useTheme`, `useToast`, `useScrollFade` |
+| `nom-ui/lib/utils` | `cn` class-merge helper |
+| `nom-ui/style.css` | Theme variables + base styles (import once, see Setup) |
+
+**Components:** accordion, alert, badge, button, card, checkbox, dialog, dropdown-menu, field, input, input-group, item, label, pagination, popover, select, separator, sonner, tabs, textarea, typography.
+
+## License
+
+MIT © digitalSloth
