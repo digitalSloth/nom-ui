@@ -3,3 +3,9 @@ dist
 *.log
 .DS_Store
 .idea
+
+# Notes
+/docs/notes/
+
+# Pipeline scratch
+.pipeline/
