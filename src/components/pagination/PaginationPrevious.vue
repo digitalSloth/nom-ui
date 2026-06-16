@@ -5,7 +5,7 @@ import type {HTMLAttributes} from "vue"
 import type {ButtonVariants} from '../button'
 import {buttonVariants} from '../button'
 import {reactiveOmit} from "@vueuse/core"
-import {ChevronLeftIcon} from "lucide-vue-next"
+import {ChevronLeftIcon} from "@lucide/vue"
 import {cn} from '../../lib/utils'
 
 const props = withDefaults(defineProps<PaginationPrevProps & {

@@ -10,7 +10,7 @@ This package is **distributed as source** (`.vue` / `.ts`). Your app's bundler c
 npm install nom-ui
 ```
 
-`vue` (`^3.4.0`) is a peer dependency — your app provides it. The component runtime deps (`reka-ui`, `lucide-vue-next`, `vue-sonner`, `@vueuse/core`, `class-variance-authority`, `clsx`, `tailwind-merge`) are pulled in automatically.
+`vue` (`^3.4.0`) is a peer dependency — your app provides it. The component runtime deps (`reka-ui`, `@lucide/vue`, `vue-sonner`, `@vueuse/core`, `class-variance-authority`, `clsx`, `tailwind-merge`) are pulled in automatically.
 
 ## Setup
 
@@ -59,6 +59,24 @@ const { toast } = useToast()
 </template>
 ```
 
+### Toasts
+
+The sonner toaster is exported as `Toaster`. Mount it **once** near your app root, then trigger toasts from anywhere with `useToast`:
+
+```vue
+<script setup lang="ts">
+import { Toaster, useToast } from 'nom-ui'
+
+const { show } = useToast()
+</script>
+
+<template>
+  <Toaster position="bottom-right" />
+  <!-- … -->
+  <button @click="show('Saved', 'success')">Save</button>
+</template>
+```
+
 ### Exports
 
 | Subpath | Contents |
@@ -70,6 +88,19 @@ const { toast } = useToast()
 | `nom-ui/style.css` | Theme variables + base styles (import once, see Setup) |
 
 **Components:** accordion, alert, badge, button, card, checkbox, dialog, dropdown-menu, field, input, input-group, item, label, pagination, popover, select, separator, sonner, tabs, textarea, typography.
+
+> The sonner toaster component is exported as `Toaster` (see [Toasts](#toasts)).
+
+## Development
+
+A live playground lives in `demo/`. It imports the library exactly as a downstream app does (`from 'nom-ui'`), so you can edit any component in `src/` and see it hot-reload — no need to link the package into a consuming app.
+
+```bash
+npm install
+npm run dev
+```
+
+This starts a Vite dev server with a page showcasing every component. `npm run build` produces the distributable library output.
 
 ## License
 

@@ -1,0 +1,8 @@
+/* Pull in the library theme variables + base styles (this also imports
+   tailwindcss, vue-sonner styles and the animate plugin). */
+@import "../src/style.css";
+
+/* Make sure Tailwind generates every utility class used by the library
+   source AND by this demo's own files. */
+@source "../src";
+@source ".";
