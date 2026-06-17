@@ -49,8 +49,17 @@ const charts = ['chart-1', 'chart-2', 'chart-3', 'chart-4', 'chart-5']
       <div class="flex flex-col gap-3">
         <Amount :value="12408.50319" symbol="ZNN" />
         <Amount :value="0.00021" symbol="ZNN" :decimals="8" />
+        <Amount :value="6223.85548333" symbol="ZNN" />
         <Amount :value="1500" symbol="QSR" :decimals="8" />
         <Amount :value="12408.50319" symbol="ZNN" fiat="≈ $9,420.18" />
+      </div>
+    </Example>
+
+    <Example label="Amount — compact notation (≥ 10,000)">
+      <div class="flex flex-col gap-3">
+        <Amount :value="42500" symbol="ZNN" compact />
+        <Amount :value="6223855.48" symbol="ZNN" compact />
+        <Amount :value="1240000000" symbol="QSR" compact />
       </div>
     </Example>
 

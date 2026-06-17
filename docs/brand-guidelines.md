@@ -154,7 +154,8 @@ there's a primitive.**
 Key props (full set in source):
 
 - `Address` — `address`, `start=6`, `end=4`, `truncate=true`, `copy=true`, `tooltip=true`, `href`
-- `Amount` — `value` (string for big numbers), `decimals=8`, `symbol`, `fiat`, `dimTrailingZeros=true`
+- `Amount` — `value` (string for big numbers), `decimals=8`, `symbol`, `fiat`, `compact`, `locale`, `dimTrailingZeros=true`
+  - `formatNumber(value, { decimals, compact, locale })` is also exported as a standalone helper
 - `TokenIcon` — `symbol`, `src`; size via `class` (default `size-10`)
 - `Table` — `density="default" | "compact"`
 - `Tabs` — `variant="default" | "underline"` (set on `TabsList` **and** each `TabsTrigger`)
