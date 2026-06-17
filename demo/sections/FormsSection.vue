@@ -30,6 +30,7 @@ const name = ref('')
 const bio = ref('')
 const terms = ref(false)
 const fruit = ref('')
+const amount = ref('1250.00')
 </script>
 
 <template>
@@ -45,6 +46,13 @@ const fruit = ref('')
           <Textarea id="bio" v-model="bio" placeholder="Tell us about yourself…" />
         </div>
         <p class="text-xs text-muted-foreground">Bound value: {{ name || '—' }}</p>
+      </div>
+    </Example>
+
+    <Example label="Amount input (numeric — tabular figures + decimal keypad)">
+      <div class="w-full max-w-sm space-y-1.5">
+        <Label for="amount">Amount</Label>
+        <Input id="amount" v-model="amount" numeric placeholder="0.00" class="text-right" />
       </div>
     </Example>
 

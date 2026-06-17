@@ -24,6 +24,16 @@ import {
   AccordionItem,
   AccordionTrigger,
   AccordionContent,
+  Table,
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableHead,
+  TableCell,
+  Address,
+  Amount,
+  TxStatus,
+  TxDirection,
   Pagination,
   PaginationContent,
   PaginationItem,
@@ -38,6 +48,13 @@ import Section from '../components/Section.vue'
 import Example from '../components/Example.vue'
 
 const page = ref(2)
+
+const density = ref<'default' | 'compact'>('default')
+const txns = [
+  { hash: '0x71C7656EC7ab88b098defB751B7401B5f6d8976F', dir: 'in', amount: '420.5', status: 'success' },
+  { hash: '0x3a1f9d8c2b7e4a6f0d5c8b1a2e3f4d5c6b7a8e9f', dir: 'out', amount: '12.00021', status: 'confirming' },
+  { hash: '0xf0e1d2c3b4a5968778695a4b3c2d1e0f9a8b7c6d', dir: 'out', amount: '1000', status: 'failed' },
+] as const
 </script>
 
 <template>
@@ -86,7 +103,46 @@ const page = ref(2)
       </ItemGroup>
     </Example>
 
-    <Example label="Tabs">
+    <Example label="Table (transactions) — toggle density">
+      <div class="w-full max-w-2xl space-y-3">
+        <div class="flex gap-2">
+          <Button
+            size="sm"
+            :variant="density === 'default' ? 'default' : 'outline'"
+            @click="density = 'default'"
+          >Default</Button>
+          <Button
+            size="sm"
+            :variant="density === 'compact' ? 'default' : 'outline'"
+            @click="density = 'compact'"
+          >Compact</Button>
+        </div>
+        <div class="rounded-lg border">
+          <Table :density="density">
+            <TableHeader>
+              <TableRow>
+                <TableHead>Transaction</TableHead>
+                <TableHead></TableHead>
+                <TableHead class="text-right">Amount</TableHead>
+                <TableHead>Status</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              <TableRow v-for="tx in txns" :key="tx.hash">
+                <TableCell><Address :address="tx.hash" :copy="false" /></TableCell>
+                <TableCell><TxDirection :direction="tx.dir" /></TableCell>
+                <TableCell class="text-right">
+                  <Amount :value="tx.amount" symbol="ZNN" class="items-end" />
+                </TableCell>
+                <TableCell><TxStatus :status="tx.status" /></TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </div>
+      </div>
+    </Example>
+
+    <Example label="Tabs — default (sliding indicator)">
       <Tabs default-value="account" class="w-full max-w-md">
         <TabsList>
           <TabsTrigger value="account">Account</TabsTrigger>
@@ -97,6 +153,25 @@ const page = ref(2)
         </TabsContent>
         <TabsContent value="password" class="pt-3 text-sm text-muted-foreground">
           Change your password here.
+        </TabsContent>
+      </Tabs>
+    </Example>
+
+    <Example label="Tabs — underline">
+      <Tabs default-value="tokens" class="w-full max-w-md">
+        <TabsList variant="underline">
+          <TabsTrigger variant="underline" value="tokens">Tokens</TabsTrigger>
+          <TabsTrigger variant="underline" value="activity">Activity</TabsTrigger>
+          <TabsTrigger variant="underline" value="nfts">NFTs</TabsTrigger>
+        </TabsList>
+        <TabsContent value="tokens" class="pt-3 text-sm text-muted-foreground">
+          Your token balances.
+        </TabsContent>
+        <TabsContent value="activity" class="pt-3 text-sm text-muted-foreground">
+          Recent transactions.
+        </TabsContent>
+        <TabsContent value="nfts" class="pt-3 text-sm text-muted-foreground">
+          Collectibles in this account.
         </TabsContent>
       </Tabs>
     </Example>

@@ -16,7 +16,10 @@
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
     "noEmit": true,
-    "baseUrl": "."
+    "baseUrl": ".",
+    "paths": {
+      "nom-ui/*": ["./src/*"]
+    }
   },
   "include": ["src"]
 }

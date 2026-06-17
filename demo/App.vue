@@ -1,22 +1,45 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import { Button, Toaster, useTheme } from 'nom-ui'
-import { MoonIcon, SunIcon, GitBranchIcon } from '@lucide/vue'
+import type { ThemeMode } from 'nom-ui'
+import {
+  Button,
+  Toaster,
+  useTheme,
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from 'nom-ui'
+import { MoonIcon, SunIcon, MonitorIcon, GitBranchIcon, CheckIcon } from '@lucide/vue'
 
+import BlockchainSection from './sections/BlockchainSection.vue'
+import TypographySection from './sections/TypographySection.vue'
 import ButtonsSection from './sections/ButtonsSection.vue'
 import BadgesSection from './sections/BadgesSection.vue'
 import FormsSection from './sections/FormsSection.vue'
 import OverlaysSection from './sections/OverlaysSection.vue'
+import NavigationSection from './sections/NavigationSection.vue'
+import ControlsSection from './sections/ControlsSection.vue'
 import DisplaySection from './sections/DisplaySection.vue'
 import FeedbackSection from './sections/FeedbackSection.vue'
 
-const { theme, toggleTheme, initTheme } = useTheme()
+const { theme, mode, setTheme, initTheme } = useTheme()
+
+const themeOptions: { value: ThemeMode; label: string }[] = [
+  { value: 'light', label: 'Light' },
+  { value: 'dark', label: 'Dark' },
+  { value: 'system', label: 'System' },
+]
 
 const nav = [
+  { id: 'blockchain', label: 'Blockchain' },
+  { id: 'typography', label: 'Typography' },
   { id: 'buttons', label: 'Button' },
-  { id: 'badges', label: 'Badge / Alert / Type' },
+  { id: 'badges', label: 'Badge / Alert' },
   { id: 'forms', label: 'Form controls' },
+  { id: 'controls', label: 'Controls' },
   { id: 'overlays', label: 'Overlays' },
+  { id: 'navigation', label: 'Navigation' },
   { id: 'display', label: 'Data display' },
   { id: 'feedback', label: 'Toasts' },
 ]
@@ -45,10 +68,28 @@ onMounted(initTheme)
           >
             <GitBranchIcon />
           </Button>
-          <Button variant="outline" size="icon" aria-label="Toggle theme" @click="toggleTheme">
-            <MoonIcon v-if="theme === 'light'" />
-            <SunIcon v-else />
-          </Button>
+          <DropdownMenu>
+            <DropdownMenuTrigger as-child>
+              <Button variant="outline" size="icon" aria-label="Theme">
+                <MonitorIcon v-if="mode === 'system'" />
+                <SunIcon v-else-if="theme === 'light'" />
+                <MoonIcon v-else />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" class="w-36">
+              <DropdownMenuItem
+                v-for="opt in themeOptions"
+                :key="opt.value"
+                @click="setTheme(opt.value)"
+              >
+                <SunIcon v-if="opt.value === 'light'" />
+                <MoonIcon v-else-if="opt.value === 'dark'" />
+                <MonitorIcon v-else />
+                {{ opt.label }}
+                <CheckIcon v-if="mode === opt.value" class="ml-auto" />
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </div>
     </header>
@@ -68,10 +109,14 @@ onMounted(initTheme)
       </aside>
 
       <main class="min-w-0 flex-1 space-y-16 pb-24">
+        <BlockchainSection />
+        <TypographySection />
         <ButtonsSection />
         <BadgesSection />
         <FormsSection />
+        <ControlsSection />
         <OverlaysSection />
+        <NavigationSection />
         <DisplaySection />
         <FeedbackSection />
       </main>

@@ -4,7 +4,7 @@ defineProps<{ label?: string }>()
 
 <template>
   <div class="space-y-3">
-    <p v-if="label" class="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+    <p v-if="label" class="text-ledger text-muted-foreground">
       {{ label }}
     </p>
     <div class="flex flex-wrap items-center gap-3">

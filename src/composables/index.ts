@@ -1,5 +1,5 @@
 export { useTheme } from './useTheme'
-export type { Theme } from './useTheme'
+export type { Theme, ThemeMode } from './useTheme'
 export { useToast } from './useToast'
 export type { ToastType, ToastOptions } from './useToast'
 export { useScrollFade } from './useScrollFade'

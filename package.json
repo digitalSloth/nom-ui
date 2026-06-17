@@ -42,12 +42,16 @@
     "./lib/utils": "./src/lib/utils.ts"
   },
   "dependencies": {
+    "@fontsource-variable/jetbrains-mono": "^5.2.8",
+    "@fontsource-variable/space-grotesk": "^5.2.10",
     "@lucide/vue": "^1.20.0",
-    "@vueuse/core": "^14.2.1",
+    "@tanstack/vue-table": "^8.21.3",
+    "@vueuse/core": "^14.3.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "reka-ui": "^2.8.0",
+    "reka-ui": "^2.9.10",
     "tailwind-merge": "^3.4.0",
+    "vaul-vue": "^0.4.1",
     "vue-sonner": "^2.0.9"
   },
   "peerDependencies": {

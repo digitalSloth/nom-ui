@@ -1,16 +1,30 @@
 @import "tailwindcss";
 @import "vue-sonner/style.css";
+@import "@fontsource-variable/space-grotesk";
+@import "@fontsource-variable/jetbrains-mono";
 @plugin "tailwindcss-animate";
 
 @layer base {
   :root {
-    --radius: 0.625rem;
+    /* Tighter corners — echoes the angular Z mark. Wired into the radius scale below. */
+    --radius: 0.375rem;
     --background: oklch(1 0 0);
     --foreground: oklch(0.145 0 0);
     --card: oklch(1 0 0);
     --card-foreground: oklch(0.145 0 0);
-    --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.145 0 0);
+    --popover: hsl(0 0% 100%);
+    --popover-foreground: hsl(0 0% 9%);
+
+    /* Elevation — soft greys on light; on dark, deeper drops + a lit top edge so
+       surfaces read against near-black (drop shadows alone disappear there). */
+    --elevation-1: 0 1px 2px 0 hsl(0 0% 0% / 0.05);
+    --elevation-2: 0 1px 3px 0 hsl(0 0% 0% / 0.08), 0 1px 2px -1px hsl(0 0% 0% / 0.06);
+    --elevation-3: 0 4px 12px -2px hsl(0 0% 0% / 0.10);
+    --elevation-4: 0 12px 24px -6px hsl(0 0% 0% / 0.13);
+    --elevation-5: 0 24px 48px -12px hsl(0 0% 0% / 0.18);
+
+    /* Plasma — the brand gradient pulled from the logo, for primary/active surfaces. */
+    --plasma: linear-gradient(180deg, hsl(120 86% 63%) 0%, hsl(145 100% 38%) 100%);
     --primary: hsl(145 100% 42%);
     --primary-foreground: hsl(0 0% 8%);
     --secondary: hsl(145 80% 35%);
@@ -19,16 +33,26 @@
     --muted-foreground: hsl(0 0% 45%);
     --accent: hsl(145 100% 95%);
     --accent-foreground: hsl(0 0% 8%);
-    --destructive: hsl(338 98% 53%);
+    /* Destructive shifted to crimson so failures read distinctly from the
+       brand pink (--zenon-pink ≈ hsl(327 95% 53%)), which is now accent-only. */
+    --destructive: hsl(352 84% 53%);
     --destructive-foreground: hsl(0 0% 100%);
+    /* On-chain status semantics */
+    --success: hsl(145 63% 38%);
+    --success-foreground: hsl(0 0% 100%);
+    --warning: hsl(38 92% 50%);
+    --warning-foreground: hsl(0 0% 8%);
+    --info: hsl(214 100% 46%);
+    --info-foreground: hsl(0 0% 100%);
     --border: hsl(0 0% 90%);
     --input: hsl(0 0% 90%);
     --ring: hsl(145 100% 42%);
-    --chart-1: oklch(0.646 0.222 41.116);
-    --chart-2: oklch(0.6 0.118 184.704);
-    --chart-3: oklch(0.398 0.07 227.392);
-    --chart-4: oklch(0.828 0.189 84.429);
-    --chart-5: oklch(0.769 0.188 70.08);
+    /* Brand tri-color ramp: green → teal → blue → violet → pink */
+    --chart-1: #00D557;
+    --chart-2: #009BA1;
+    --chart-3: #0061EB;
+    --chart-4: #7C3BBD;
+    --chart-5: #F91690;
     --sidebar: oklch(0.985 0 0);
     --sidebar-foreground: oklch(0.145 0 0);
     --sidebar-primary: oklch(0.205 0 0);
@@ -50,8 +74,15 @@
     --foreground: hsl(0 0% 98%);
     --card: hsl(0 0% 10%);
     --card-foreground: hsl(0 0% 98%);
-    --popover: oklch(0.269 0 0);
-    --popover-foreground: oklch(0.985 0 0);
+    /* Popover sits one step above card (14% vs 10%) so overlays read as elevated. */
+    --popover: hsl(0 0% 14%);
+    --popover-foreground: hsl(0 0% 98%);
+
+    --elevation-1: 0 1px 2px 0 hsl(0 0% 0% / 0.45), inset 0 1px 0 0 hsl(0 0% 100% / 0.03);
+    --elevation-2: 0 2px 6px -1px hsl(0 0% 0% / 0.55), inset 0 1px 0 0 hsl(0 0% 100% / 0.04);
+    --elevation-3: 0 8px 18px -4px hsl(0 0% 0% / 0.60), inset 0 1px 0 0 hsl(0 0% 100% / 0.05);
+    --elevation-4: 0 14px 32px -8px hsl(0 0% 0% / 0.65), inset 0 1px 0 0 hsl(0 0% 100% / 0.05);
+    --elevation-5: 0 28px 56px -12px hsl(0 0% 0% / 0.70), inset 0 1px 0 0 hsl(0 0% 100% / 0.06);
     --primary: hsl(145 100% 42%);
     --primary-foreground: hsl(0 0% 8%);
     --secondary: hsl(145 80% 35%);
@@ -60,16 +91,23 @@
     --muted-foreground: hsl(0 0% 65%);
     --accent: hsl(145 100% 15%);
     --accent-foreground: hsl(0 0% 98%);
-    --destructive: hsl(338 98% 53%);
+    --destructive: hsl(352 86% 58%);
     --destructive-foreground: hsl(0 0% 98%);
+    --success: hsl(145 63% 45%);
+    --success-foreground: hsl(0 0% 8%);
+    --warning: hsl(38 95% 55%);
+    --warning-foreground: hsl(0 0% 8%);
+    --info: hsl(214 100% 62%);
+    --info-foreground: hsl(0 0% 8%);
     --border: hsl(0 0% 20%);
     --input: hsl(0 0% 20%);
     --ring: hsl(145 100% 42%);
-    --chart-1: oklch(0.488 0.243 264.376);
-    --chart-2: oklch(0.696 0.17 162.48);
-    --chart-3: oklch(0.769 0.188 70.08);
-    --chart-4: oklch(0.627 0.265 303.9);
-    --chart-5: oklch(0.645 0.246 16.439);
+    /* Brand tri-color ramp: green → teal → blue → violet → pink */
+    --chart-1: #00D557;
+    --chart-2: #00B4BC;
+    --chart-3: #2E84FF;
+    --chart-4: #9A5BD6;
+    --chart-5: #F91690;
     --sidebar: oklch(0.205 0 0);
     --sidebar-foreground: oklch(0.985 0 0);
     --sidebar-primary: oklch(0.488 0.243 264.376);
@@ -83,6 +121,25 @@
 
 /* Register CSS variables with Tailwind */
 @theme inline {
+  --font-sans: "Space Grotesk Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, "SF Mono", "Menlo", monospace;
+
+  /* Radius scale derived from --radius (shadcn convention) */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  /* Shadow scale → theme-aware elevation tokens */
+  --shadow-2xs: var(--elevation-1);
+  --shadow-xs: var(--elevation-1);
+  --shadow-sm: var(--elevation-2);
+  --shadow: var(--elevation-2);
+  --shadow-md: var(--elevation-3);
+  --shadow-lg: var(--elevation-4);
+  --shadow-xl: var(--elevation-5);
+  --shadow-2xl: var(--elevation-5);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -99,6 +156,12 @@
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
@@ -121,11 +184,48 @@
   --color-zenon-black: var(--zenon-black);
 }
 
+/* Plasma fill — the brand gradient, for primary/active/positive surfaces. */
+@utility bg-plasma {
+  background-image: var(--plasma);
+}
+
+/* Ledger label — the signature mono treatment for table headers, eyebrows and
+   stat captions. Pair with a colour utility (e.g. text-muted-foreground). */
+@utility text-ledger {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  line-height: 1rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
 @layer base {
   * {
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+  }
+
+  /* Smoothly animate hover / focus / state changes on interactive elements. */
+  a,
+  button,
+  label,
+  summary,
+  input,
+  select,
+  textarea,
+  [role="button"],
+  [role="tab"],
+  [role="menuitem"],
+  [role="menuitemcheckbox"],
+  [role="menuitemradio"],
+  [role="option"],
+  [role="switch"],
+  [role="checkbox"] {
+    transition-property: color, background-color, border-color, text-decoration-color, box-shadow, filter, opacity;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
   }
 }

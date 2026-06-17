@@ -1,20 +1,26 @@
 <script setup lang="ts">
 import type {HTMLAttributes} from "vue"
+import {computed} from "vue"
 import {cn} from "../../lib/utils"
+import {headingVariants} from "./index.ts"
 
-const props = defineProps<{
+type Level = 1 | 2 | 3 | 4 | 5 | 6
+
+const props = withDefaults(defineProps<{
+  as?: `h${Level}`
+  /** Visual size — defaults to the numeric part of `as`, so you can render an
+      h2 element that looks like an h1 when you need to. */
+  level?: Level
   class?: HTMLAttributes["class"]
-  as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6"
-}>()
+}>(), {
+  as: "h2",
+})
 
-const tag = props.as ?? "h3"
+const level = computed<Level>(() => props.level ?? (Number(props.as.slice(1)) as Level))
 </script>
 
 <template>
-  <component
-    :is="tag"
-    :class="cn('font-semibold leading-none tracking-tight', props.class)"
-  >
+  <component :is="as" :class="cn(headingVariants({ level }), props.class)">
     <slot />
   </component>
 </template>

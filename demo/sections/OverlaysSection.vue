@@ -23,6 +23,22 @@ import {
   DropdownMenuItem,
   DropdownMenuCheckboxItem,
   DropdownMenuShortcut,
+  Sheet,
+  SheetTrigger,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetDescription,
+  SheetFooter,
+  SheetClose,
+  Drawer,
+  DrawerTrigger,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerClose,
 } from 'nom-ui'
 import { SettingsIcon, UserIcon, LogOutIcon, CreditCardIcon } from '@lucide/vue'
 import Section from '../components/Section.vue'
@@ -101,6 +117,53 @@ const showPanel = ref(true)
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
+    </Example>
+
+    <Example label="Sheet (side panel)">
+      <Sheet>
+        <SheetTrigger as-child>
+          <Button variant="outline">Open sheet</Button>
+        </SheetTrigger>
+        <SheetContent>
+          <SheetHeader>
+            <SheetTitle>Wallet settings</SheetTitle>
+            <SheetDescription>Manage preferences for this account.</SheetDescription>
+          </SheetHeader>
+          <div class="space-y-3 px-4">
+            <div class="space-y-1.5">
+              <Label for="sheet-name">Display name</Label>
+              <Input id="sheet-name" default-value="Pillar One" />
+            </div>
+          </div>
+          <SheetFooter>
+            <SheetClose as-child>
+              <Button>Save</Button>
+            </SheetClose>
+          </SheetFooter>
+        </SheetContent>
+      </Sheet>
+    </Example>
+
+    <Example label="Drawer (bottom)">
+      <Drawer>
+        <DrawerTrigger as-child>
+          <Button variant="outline">Open drawer</Button>
+        </DrawerTrigger>
+        <DrawerContent>
+          <div class="mx-auto w-full max-w-sm">
+            <DrawerHeader>
+              <DrawerTitle>Confirm send</DrawerTitle>
+              <DrawerDescription>Review the transaction before broadcasting.</DrawerDescription>
+            </DrawerHeader>
+            <DrawerFooter>
+              <Button>Confirm</Button>
+              <DrawerClose as-child>
+                <Button variant="ghost">Cancel</Button>
+              </DrawerClose>
+            </DrawerFooter>
+          </div>
+        </DrawerContent>
+      </Drawer>
     </Example>
   </Section>
 </template>
