@@ -40,6 +40,7 @@ const charts = ['chart-1', 'chart-2', 'chart-3', 'chart-4', 'chart-5']
         <Address :address="addr" />
         <Address :address="addr" :href="`https://explorer.example/address/${addr}`" />
         <Address :address="addr" :start="10" :end="8" :copy="false" />
+        <Address :address="addr" :tooltip="false" />
         <Address address="z1qqjnwjjpnue8xmmpanz6csze6tcmtzzdtfsww7" />
       </div>
     </Example>

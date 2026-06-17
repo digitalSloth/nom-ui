@@ -15,6 +15,8 @@ const props = withDefaults(defineProps<{
   truncate?: boolean
   /** Show the inline copy button. */
   copy?: boolean
+  /** Reveal the full value in a tooltip on hover. */
+  tooltip?: boolean
   /** Explorer URL — renders the value as a link when set. */
   href?: string
   class?: HTMLAttributes["class"]
@@ -23,6 +25,7 @@ const props = withDefaults(defineProps<{
   end: 4,
   truncate: true,
   copy: true,
+  tooltip: true,
 })
 
 const display = computed(() => {
@@ -30,25 +33,32 @@ const display = computed(() => {
   if (!props.truncate || v.length <= props.start + props.end + 1) return v
   return `${v.slice(0, props.start)}…${v.slice(-props.end)}`
 })
+
+const valueTag = computed(() => (props.href ? "a" : "span"))
+const valueAttrs = computed(() =>
+  props.href
+    ? {
+        href: props.href,
+        target: "_blank",
+        rel: "noreferrer",
+        class: "underline-offset-4 hover:text-info hover:underline",
+      }
+    : {},
+)
 </script>
 
 <template>
   <span :class="cn('inline-flex items-center gap-1 font-mono text-sm', props.class)">
-    <TooltipProvider>
+    <TooltipProvider v-if="tooltip">
       <Tooltip>
         <TooltipTrigger as-child>
-          <a
-            v-if="href"
-            :href="href"
-            target="_blank"
-            rel="noreferrer"
-            class="underline-offset-4 hover:text-info hover:underline"
-          >{{ display }}</a>
-          <span v-else>{{ display }}</span>
+          <component :is="valueTag" v-bind="valueAttrs">{{ display }}</component>
         </TooltipTrigger>
         <TooltipContent class="font-mono">{{ address }}</TooltipContent>
       </Tooltip>
     </TooltipProvider>
+    <component :is="valueTag" v-else v-bind="valueAttrs">{{ display }}</component>
+
     <CopyButton v-if="copy" :value="address" size="icon-sm" class="size-7" />
   </span>
 </template>
