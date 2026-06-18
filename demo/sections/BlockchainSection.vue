@@ -82,10 +82,12 @@ const charts = ['chart-1', 'chart-2', 'chart-3', 'chart-4', 'chart-5']
       <TxDirection direction="out" label="Sent" />
     </Example>
 
-    <Example label="Token icon">
-      <TokenIcon symbol="ZNN" src="https://zenon.network/img/logo.svg" />
+    <Example label="Token icon (built-in ZNN / QSR logos)">
+      <TokenIcon symbol="ZNN" />
       <TokenIcon symbol="QSR" />
-      <TokenIcon symbol="ETH" class="size-12" />
+      <TokenIcon symbol="ETH" />
+      <TokenIcon symbol="ZNN" class="size-12" />
+      <TokenIcon symbol="QSR" class="size-12" />
     </Example>
 
     <Example label="Avatar (image + fallback + sizes)">
