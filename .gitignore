@@ -9,3 +9,6 @@ dist
 
 # Pipeline scratch
 .pipeline/
+
+# demo build output
+dist-demo
