@@ -1,5 +1,9 @@
 # nom-ui
 
+Demo: https://digitalsloth.github.io/nom-ui/
+
+---
+
 Shared [shadcn-vue](https://www.shadcn-vue.com/) component library for NoM apps — Vue 3 (Composition API) + Tailwind CSS 4.
 
 This package is **distributed as source** (`.vue` / `.ts`). Your app's bundler compiles it, so a Vue-aware build setup (Vite + `@vitejs/plugin-vue`) and Tailwind CSS 4 are required. There is no pre-built `dist`.
