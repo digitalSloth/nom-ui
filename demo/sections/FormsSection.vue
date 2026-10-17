@@ -21,6 +21,7 @@ import {
   InputGroupAddon,
   InputGroupText,
   InputGroupButton,
+  FileDropzone,
 } from 'nom-ui'
 import { SearchIcon, MailIcon, CopyIcon } from '@lucide/vue'
 import Section from '../components/Section.vue'
@@ -31,6 +32,8 @@ const bio = ref('')
 const terms = ref(false)
 const fruit = ref('')
 const amount = ref('1250.00')
+
+const moduleFile = ref<File | null>(null)
 </script>
 
 <template>
@@ -116,6 +119,18 @@ const amount = ref('1250.00')
           <InputGroupInput type="email" placeholder="name@email.com" />
         </InputGroup>
       </div>
+    </Example>
+
+    <Example label="FileDropzone">
+      <FileDropzone
+        v-model="moduleFile"
+        accept=".wasm"
+        :max-size="256 * 1024"
+        hint=".wasm, up to 256 KiB"
+        class="w-full max-w-md"
+      >
+        Drop a contract module here, or click to choose
+      </FileDropzone>
     </Example>
   </Section>
 </template>
