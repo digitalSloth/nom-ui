@@ -20,6 +20,9 @@ import {
   TooltipTrigger,
   TooltipContent,
   Button,
+  Stepper,
+  HexView,
+  DescriptionItem,
 } from 'nom-ui'
 import Section from '../components/Section.vue'
 import Example from '../components/Example.vue'
@@ -27,6 +30,15 @@ import Example from '../components/Example.vue'
 const addr = '0x71C7656EC7ab88b098defB751B7401B5f6d8976F'
 const autoLock = ref(true)
 const charts = ['chart-1', 'chart-2', 'chart-3', 'chart-4', 'chart-5']
+
+const deploySteps = [
+  { id: 'start', title: 'Start deploy', description: 'Published in block 4201', state: 'done' },
+  { id: 'chunk-0', title: 'Chunk 1 of 3', state: 'done' },
+  { id: 'chunk-1', title: 'Chunk 2 of 3', description: 'Waiting for wallet approval', state: 'active' },
+  { id: 'chunk-2', title: 'Chunk 3 of 3', state: 'waiting' },
+  { id: 'finalize', title: 'Finalize', description: 'Rejected by the wallet', state: 'failed' },
+] as const
+const sampleHex = '0x' + 'a7ffc6f8bf1ed76651c14756a061d662f580ff4de43b49fa82d80a4b80f8434a'.repeat(5)
 </script>
 
 <template>
@@ -149,6 +161,21 @@ const charts = ['chart-1', 'chart-2', 'chart-3', 'chart-4', 'chart-5']
         <Skeleton class="h-4 w-3/4" />
         <Skeleton class="h-4 w-1/2" />
         <Skeleton class="h-9 w-full" />
+      </div>
+    </Example>
+
+    <Example label="Stepper">
+      <Stepper :steps="[...deploySteps]" class="w-full max-w-md" />
+    </Example>
+
+    <Example label="HexView">
+      <HexView :value="sampleHex" label="Return data" :preview-length="96" class="w-full max-w-xl" />
+    </Example>
+
+    <Example label="DescriptionItem">
+      <div class="grid w-full max-w-xl grid-cols-2 gap-4">
+        <DescriptionItem label="Domain"><span class="font-mono tabular-nums">3</span></DescriptionItem>
+        <DescriptionItem label="Owner"><Address :address="addr" /></DescriptionItem>
       </div>
     </Example>
   </Section>

@@ -150,6 +150,11 @@ there's a primitive.**
 | Fee/hash explanations | `Tooltip` | Detail on hover without clutter |
 | Confirmations / sync progress | `Progress` | Bridge transfers, node sync |
 | Feedback after an action | `useToast` + `Toaster` | Mount `<Toaster />` once at root |
+| A step-by-step send or deploy | `Stepper` | Waiting, in progress, done and failed states with one marker family |
+| Raw bytes or hex | `HexView` | Mono, wrapped, copyable, with a byte count and a collapsed preview |
+| A label and value pair on a detail page | `DescriptionItem` | `text-ledger` label over the value |
+| A file the user supplies | `FileDropzone` | Pick or drop one file, with type and size checks |
+| A list or panel with nothing in it | `EmptyState` | Centered message with an optional icon and action |
 
 Key props (full set in source):
 

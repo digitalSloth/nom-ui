@@ -42,6 +42,7 @@ import {
   PaginationPrevious,
   PaginationNext,
   PaginationLast,
+  EmptyState,
 } from 'nom-ui'
 import { FileTextIcon, ChevronRightIcon } from '@lucide/vue'
 import Section from '../components/Section.vue'
@@ -208,6 +209,12 @@ const txns = [
           <PaginationLast />
         </PaginationContent>
       </Pagination>
+    </Example>
+
+    <Example label="EmptyState">
+      <EmptyState title="No contracts yet" class="w-full">
+        Contracts you deploy appear here.
+      </EmptyState>
     </Example>
   </Section>
 </template>
