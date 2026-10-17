@@ -38,7 +38,7 @@ const charts = ['chart-1', 'chart-2', 'chart-3', 'chart-4', 'chart-5']
     <Example label="Address / hash">
       <div class="flex flex-col gap-3">
         <Address :address="addr" />
-        <Address :address="addr" :href="`https://explorer.example/address/${addr}`" />
+        <Address :address="addr" :href="`https://explorer.example/address/${addr}`" target="_blank" />
         <Address :address="addr" :start="10" :end="8" :copy="false" />
         <Address :address="addr" :tooltip="false" />
         <Address address="z1qqjnwjjpnue8xmmpanz6csze6tcmtzzdtfsww7" />

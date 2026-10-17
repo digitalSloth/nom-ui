@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type {HTMLAttributes} from "vue"
+import type {Component, HTMLAttributes} from "vue"
 import {computed} from "vue"
 import {useMediaQuery} from "@vueuse/core"
 import {cn} from "nom-ui/lib/utils"
@@ -27,6 +27,16 @@ const props = withDefaults(defineProps<{
   tooltip?: boolean
   /** Explorer URL — renders the value as a link when set. */
   href?: string
+  /**
+   * In-app route. Renders the value with `linkAs` (e.g. vue-router's
+   * `RouterLink`) instead of a plain anchor, so navigation stays client-side.
+   * Takes precedence over `href` when `linkAs` is also set.
+   */
+  to?: string | Record<string, unknown>
+  /** Component used to render the link when `to` is set. */
+  linkAs?: Component | string
+  /** Link target (e.g. "_blank"). Omit to open in the current tab. */
+  target?: "_self" | "_blank" | "_parent" | "_top"
   class?: HTMLAttributes["class"]
 }>(), {
   start: 6,
@@ -53,16 +63,24 @@ const display = computed(() => {
   return `${v.slice(0, props.start)}…${v.slice(-props.end)}`
 })
 
-const valueTag = computed(() => (props.href ? "a" : "span"))
+const isRouted = computed(() => props.to !== undefined && props.linkAs !== undefined)
+const isLink = computed(() => isRouted.value || !!props.href)
+const valueTag = computed(() => (isRouted.value ? props.linkAs! : props.href ? "a" : "span"))
 const valueClass = computed(() =>
   cn(
-    props.href && "underline-offset-4 hover:text-info hover:underline",
+    isLink.value && "text-info underline-offset-4 hover:underline",
     props.wrap && "break-all",
   ),
 )
 const valueAttrs = computed(() =>
-  props.href
-    ? {href: props.href, target: "_blank", rel: "noreferrer"}
+  isRouted.value
+    ? {to: props.to, target: props.target}
+    : props.href
+    ? {
+        href: props.href,
+        target: props.target,
+        rel: props.target === "_blank" ? "noopener noreferrer" : undefined,
+      }
     : {},
 )
 </script>

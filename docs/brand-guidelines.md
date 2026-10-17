@@ -46,7 +46,7 @@ The brand is three colors, not one. Use them by role so screens read as Zenon, n
 - **Green** — primary actions, success/confirmed, active/selected. Primary surfaces render
   the **plasma** gradient (see [Signature](#7-signature-plasma--ledger)).
 - **Blue** (`info`) — informational/in-progress (`pending`), and **external / explorer
-  links** (e.g. `Address` with `href` hovers blue). Blue = "go look it up."
+  links** (e.g. `Address` with `href` or `to` is blue, underlined on hover). Blue = "go look it up."
 - **Pink** (`zenon-pink`) — one reserved highlight only. `Badge variant="highlight"` for
   "new" / featured. Use sparingly; if it's everywhere it stops meaning anything.
 
@@ -153,7 +153,7 @@ there's a primitive.**
 
 Key props (full set in source):
 
-- `Address` — `address`, `start=6`, `end=4`, `truncate=true`, `copy=true`, `tooltip=true`, `href`
+- `Address` — `address`, `start=6`, `end=4`, `truncate=true`, `copy=true`, `tooltip=true`, `href`, `to` + `linkAs` (router link), `target`
 - `Amount` — `value` (string for big numbers), `decimals=8`, `symbol`, `fiat`, `compact`, `locale`, `dimTrailingZeros=true`
   - `formatNumber(value, { decimals, compact, locale })` is also exported as a standalone helper
 - `TokenIcon` — `symbol`, `src`; size via `class` (default `size-10`). Ships **built-in
