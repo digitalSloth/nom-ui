@@ -43,12 +43,23 @@ import {
   PaginationNext,
   PaginationLast,
   EmptyState,
+  JsonView,
+  StatTile,
 } from 'nom-ui'
 import { FileTextIcon, ChevronRightIcon } from '@lucide/vue'
 import Section from '../components/Section.vue'
 import Example from '../components/Example.vue'
 
 const page = ref(2)
+
+const jsonValue = {
+  count: 42,
+  name: 'zenon',
+  supply: 1000000000000n,
+  hash: new Uint8Array([222, 173, 190, 239]),
+  nested: { ok: true, tags: ['a', 'b'] },
+  list: [1, 2, 3],
+}
 
 const density = ref<'default' | 'compact'>('default')
 const txns = [
@@ -59,7 +70,7 @@ const txns = [
 </script>
 
 <template>
-  <Section id="display" title="Data display" description="Card, Item, Tabs, Accordion and Pagination.">
+  <Section id="display" title="Data display" description="Card, Item, Tabs, Accordion, Pagination, JsonView and StatTile.">
     <Example label="Card">
       <Card class="w-full max-w-sm">
         <CardHeader>
@@ -215,6 +226,24 @@ const txns = [
       <EmptyState title="No contracts yet" class="w-full">
         Contracts you deploy appear here.
       </EmptyState>
+    </Example>
+
+    <Example label="JsonView">
+      <JsonView :value="jsonValue" class="w-full max-w-md">
+        <template #actions>
+          <Button variant="ghost" size="xs">Raw</Button>
+        </template>
+      </JsonView>
+    </Example>
+
+    <Example label="StatTile">
+      <div class="grid w-full max-w-2xl grid-cols-2 gap-4 sm:grid-cols-3">
+        <StatTile label="Blocks" :value="123456" />
+        <StatTile label="Network" value="Zeno L2" hint="Mainnet" />
+        <StatTile label="Status">
+          <span class="text-success">Healthy</span>
+        </StatTile>
+      </div>
     </Example>
   </Section>
 </template>

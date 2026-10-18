@@ -12,3 +12,6 @@ dist
 
 # demo build output
 dist-demo
+
+# npm pack output
+*.tgz

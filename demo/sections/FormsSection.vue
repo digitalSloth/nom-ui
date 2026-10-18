@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import {
   Input,
   Textarea,
@@ -22,6 +22,7 @@ import {
   InputGroupText,
   InputGroupButton,
   FileDropzone,
+  SearchInput,
 } from 'nom-ui'
 import { SearchIcon, MailIcon, CopyIcon } from '@lucide/vue'
 import Section from '../components/Section.vue'
@@ -34,6 +35,20 @@ const fruit = ref('')
 const amount = ref('1250.00')
 
 const moduleFile = ref<File | null>(null)
+
+const query = ref('')
+const searching = ref(false)
+const searchError = ref<string | null>(null)
+watch(query, () => {
+  searchError.value = null
+})
+function onSearch(value: string) {
+  searching.value = true
+  setTimeout(() => {
+    searching.value = false
+    if (!value.startsWith('z1')) searchError.value = `No match for ${value}`
+  }, 600)
+}
 </script>
 
 <template>
@@ -131,6 +146,17 @@ const moduleFile = ref<File | null>(null)
       >
         Drop a contract module here, or click to choose
       </FileDropzone>
+    </Example>
+
+    <Example label="SearchInput">
+      <SearchInput
+        v-model="query"
+        class="w-72"
+        placeholder="Search address or hash"
+        :loading="searching"
+        :error="searchError"
+        @submit="onSearch"
+      />
     </Example>
   </Section>
 </template>

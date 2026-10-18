@@ -155,6 +155,11 @@ there's a primitive.**
 | A label and value pair on a detail page | `DescriptionItem` | `text-ledger` label over the value |
 | A file the user supplies | `FileDropzone` | Pick or drop one file, with type and size checks |
 | A list or panel with nothing in it | `EmptyState` | Centered message with an optional icon and action |
+| A list paged by cursor, with no total | `CursorPagination` | Previous and next buttons plus an optional page-size select, no page numbers |
+| A raw JSON value or RPC result | `JsonView` | Mono, scrollable and copyable, with bigint and bytes serialized |
+| A search field | `SearchInput` | Search icon, submit on Enter, spinner and error line; the caller routes |
+| A headline number on a dashboard | `StatTile` | `text-ledger` label over a large mono value |
+| App navigation on a narrow screen | `MobileNav` | Menu button that opens a sheet of links, with any link component |
 
 Key props (full set in source):
 
