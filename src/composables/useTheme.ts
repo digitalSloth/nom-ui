@@ -5,6 +5,19 @@ export type Theme = 'light' | 'dark'
 /** The user's preference — `system` follows the OS. */
 export type ThemeMode = 'light' | 'dark' | 'system'
 
+// The browser-extension storage API, present only inside an extension.
+// Declared here so apps type-check this file without @types/chrome.
+declare const chrome:
+  | {
+      storage?: {
+        local: {
+          get: (key: string) => Promise<Record<string, unknown>>
+          set: (items: Record<string, unknown>) => void
+        }
+      }
+    }
+  | undefined
+
 function isMode(value: unknown): value is ThemeMode {
   return value === 'light' || value === 'dark' || value === 'system'
 }
