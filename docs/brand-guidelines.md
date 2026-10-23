@@ -229,6 +229,42 @@ spend your boldness there and keep the rest disciplined.
 
 ---
 
+## 10. Theming
+
+An app restyles nom-ui by setting CSS variables after `nom-ui/style.css`, never by editing components. The semantic tokens in §1 recolour everything. The hooks below cover the values those tokens can't reach. Each default keeps the stock nom-ui look, so an app that sets nothing sees no change.
+
+| Hook | Default | Read by |
+| --- | --- | --- |
+| `--on-plasma` | `var(--primary-foreground)` | Text on `bg-plasma`: the default `Button` (`text-on-plasma`) |
+| `--link` | `var(--info)` | `Address` links (`text-link`) |
+| `--highlight` | `var(--zenon-pink)` | The `highlight` `Badge` (`bg-highlight/10`, `text-highlight`) |
+| `--card-radius` | `calc(var(--radius) + 4px)` | `Card` corners |
+| `--card-shadow` | `var(--elevation-2)` | `Card` shadow. Use `0 0 #0000` for none, because `none` breaks the shadow stack |
+| `--badge-radius` | `9999px` | `Badge` corners |
+| `--badge-font` | unset, so the badge inherits its font | `Badge` font family, for example `var(--font-mono)` |
+| `--switch-radius` | `9999px` | `Switch` track; the thumb uses 1px less |
+| `--ledger-tracking` | `0.06em` | `text-ledger` letter spacing |
+
+Set the colour hooks in both `:root` and `.dark`. The shape and type hooks need `:root` only.
+
+```css
+@import "nom-ui/style.css";
+
+:root {
+  --link: #08786e;
+  --card-radius: 0.375rem;
+  --card-shadow: 0 0 #0000;
+  --badge-radius: 0.125rem;
+  --badge-font: var(--font-mono);
+}
+
+.dark {
+  --link: #3fd9c9;
+}
+```
+
+---
+
 ## Quick checklist
 
 - [ ] Addresses/hashes via `Address`, amounts via `Amount` — never raw strings

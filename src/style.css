@@ -67,6 +67,17 @@
     --zenon-blue: #0061EB;
     --zenon-pink: #F91690;
     --zenon-black: #151515;
+
+    /* Theme hooks — an app sets these to restyle components without
+       changing them. Defaults keep the stock nom-ui look. */
+    --on-plasma: var(--primary-foreground);
+    --link: var(--info);
+    --highlight: var(--zenon-pink);
+    --card-radius: calc(var(--radius) + 4px);
+    --card-shadow: var(--elevation-2);
+    --badge-radius: 9999px;
+    --switch-radius: 9999px;
+    --ledger-tracking: 0.06em;
   }
 
   .dark {
@@ -116,6 +127,12 @@
     --sidebar-accent-foreground: oklch(0.985 0 0);
     --sidebar-border: oklch(1 0 0 / 10%);
     --sidebar-ring: oklch(0.439 0 0);
+
+    /* Re-resolve the colour hooks against the dark values when .dark
+       sits below the root. */
+    --on-plasma: var(--primary-foreground);
+    --link: var(--info);
+    --highlight: var(--zenon-pink);
   }
 }
 
@@ -182,6 +199,9 @@
   --color-zenon-blue: var(--zenon-blue);
   --color-zenon-pink: var(--zenon-pink);
   --color-zenon-black: var(--zenon-black);
+  --color-on-plasma: var(--on-plasma);
+  --color-link: var(--link);
+  --color-highlight: var(--highlight);
 }
 
 /* Plasma fill — the brand gradient, for primary/active/positive surfaces. */
@@ -197,7 +217,7 @@
   line-height: 1rem;
   font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: var(--ledger-tracking);
 }
 
 @layer base {

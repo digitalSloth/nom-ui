@@ -68,7 +68,7 @@ const isLink = computed(() => isRouted.value || !!props.href)
 const valueTag = computed(() => (isRouted.value ? props.linkAs! : props.href ? "a" : "span"))
 const valueClass = computed(() =>
   cn(
-    isLink.value && "text-info underline-offset-4 hover:underline",
+    isLink.value && "text-link underline-offset-4 hover:underline",
     props.wrap && "break-all",
   ),
 )
