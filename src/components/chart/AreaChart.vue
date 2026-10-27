@@ -94,6 +94,7 @@ const template = (d: ChartRow) =>
         :x="x"
         :color="color"
         v-bind="crosshairY"
+        :duration="0"
         :template="template"
       />
       <VisTooltip />

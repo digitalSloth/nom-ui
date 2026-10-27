@@ -260,9 +260,15 @@
   --vis-tooltip-background-color: var(--popover);
   --vis-tooltip-border-color: var(--border);
   --vis-tooltip-text-color: var(--popover-foreground);
+  --vis-tooltip-transition-duration: 0ms;
   --vis-crosshair-line-stroke-color: var(--muted-foreground);
+  --vis-crosshair-circle-stroke-color: var(--background);
   --vis-donut-background-color: var(--muted);
   --vis-map-feature-color: var(--muted);
   --vis-map-boundary-color: var(--border);
   --vis-map-point-default-stroke-color: var(--background);
+}
+
+[data-slot="world-map"] svg * {
+  transition: none;
 }
