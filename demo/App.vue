@@ -21,6 +21,7 @@ import OverlaysSection from './sections/OverlaysSection.vue'
 import NavigationSection from './sections/NavigationSection.vue'
 import ControlsSection from './sections/ControlsSection.vue'
 import DisplaySection from './sections/DisplaySection.vue'
+import ChartsSection from './sections/ChartsSection.vue'
 import FeedbackSection from './sections/FeedbackSection.vue'
 
 const { theme, mode, setTheme, initTheme } = useTheme()
@@ -41,6 +42,7 @@ const nav = [
   { id: 'overlays', label: 'Overlays' },
   { id: 'navigation', label: 'Navigation' },
   { id: 'display', label: 'Data display' },
+  { id: 'charts', label: 'Charts / map' },
   { id: 'feedback', label: 'Toasts' },
 ]
 
@@ -118,6 +120,7 @@ onMounted(initTheme)
         <OverlaysSection />
         <NavigationSection />
         <DisplaySection />
+        <ChartsSection />
         <FeedbackSection />
       </main>
     </div>

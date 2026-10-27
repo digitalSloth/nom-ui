@@ -124,11 +124,11 @@ when to use each.
 | `nom-ui/style.css` | Theme variables + base styles (import once, see Setup) |
 
 **Components:** accordion, address, alert, amount, avatar, badge, breadcrumb, button,
-button-group, card, checkbox, collapsible, copy-button, cursor-pagination, dialog, drawer, dropdown-menu,
+button-group, card, chart, checkbox, collapsible, copy-button, cursor-pagination, dialog, drawer, dropdown-menu,
 field, input, input-group, item, json-view, label, mobile-nav, navigation-menu,
 pagination, popover, progress, radio-group, scroll-area, search-input, select, separator,
 sheet, skeleton, sonner, spinner, stat-tile, switch, table, tabs, textarea, toggle,
-toggle-group, token-icon, tooltip, tx-direction, tx-status, typography.
+toggle-group, token-icon, tooltip, tx-direction, tx-status, typography, world-map.
 
 > The sonner toaster component is exported as `Toaster` (see [Toasts](#toasts)).
 

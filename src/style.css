@@ -249,3 +249,20 @@
     transition-duration: 150ms;
   }
 }
+
+[data-slot="chart"],
+[data-slot="world-map"] {
+  --vis-font-family: var(--font-mono);
+  --vis-axis-tick-label-color: var(--muted-foreground);
+  --vis-axis-grid-color: var(--border);
+  --vis-axis-domain-color: var(--border);
+  --vis-axis-tick-color: var(--border);
+  --vis-tooltip-background-color: var(--popover);
+  --vis-tooltip-border-color: var(--border);
+  --vis-tooltip-text-color: var(--popover-foreground);
+  --vis-crosshair-line-stroke-color: var(--muted-foreground);
+  --vis-donut-background-color: var(--muted);
+  --vis-map-feature-color: var(--muted);
+  --vis-map-boundary-color: var(--border);
+  --vis-map-point-default-stroke-color: var(--background);
+}

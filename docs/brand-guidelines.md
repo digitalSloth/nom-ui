@@ -160,6 +160,8 @@ there's a primitive.**
 | A search field | `SearchInput` | Search icon, submit on Enter, spinner and error line; the caller routes |
 | A headline number on a dashboard | `StatTile` | `text-ledger` label over a large mono value |
 | App navigation on a narrow screen | `MobileNav` | Menu button that opens a sheet of links, with any link component |
+| A trend over days or epochs, or a share of a whole | AreaChart, BarChart, DonutChart | Series coloured from the chart ramp by position, stacked or line-only modes, no motion |
+| Locations on a world map | WorldMap | Points in chart-1 with escaped hover labels |
 
 Key props (full set in source):
 
