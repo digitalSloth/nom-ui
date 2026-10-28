@@ -160,7 +160,7 @@ there's a primitive.**
 | A search field | `SearchInput` | Search icon, submit on Enter, spinner and error line; the caller routes |
 | A headline number on a dashboard | `StatTile` | `text-ledger` label over a large mono value |
 | App navigation on a narrow screen | `MobileNav` | Menu button that opens a sheet of links, with any link component |
-| A trend over days or epochs, or a share of a whole | AreaChart, BarChart, DonutChart | Series coloured from the chart ramp by position, stacked or line-only modes, no motion |
+| A trend over days or epochs, or a share of a whole | AreaChart, BarChart, DonutChart | Series take `color` or the chart ramp by position; stacked charts fold past five into Other; `AreaChart` fills only with `fill`; `BarChart signed` colours by sign over a zero line; `DonutChart` shows `total` and `unit` in the centre with legend percentages; no motion |
 | Locations on a world map | WorldMap | Points in chart-1 with escaped hover labels |
 
 Key props (full set in source):
@@ -173,6 +173,9 @@ Key props (full set in source):
   The marks are also exported directly as `ZnnLogo` / `QsrLogo`.
 - `Table` — `density="default" | "compact"`
 - `Tabs` — `variant="default" | "underline"` (set on `TabsList` **and** each `TabsTrigger`)
+- `AreaChart` — `data`, `index`, `series` (`{ key, label, color? }`), `stacked=false`, `fill=false` (only for counts from zero), `indexFormatter`, `valueFormatter`
+- `BarChart` — `data`, `index`, `series` (`{ key, label, color? }`), `stacked=false`, `signed=false`, `indexFormatter`, `valueFormatter`
+- `DonutChart` — `data` (`{ label, value, color? }`), `total`, `unit`, `valueFormatter`
 
 ---
 

@@ -9,4 +9,6 @@ export type ChartRow = Record<string, string | number>
 export interface ChartSeries {
   key: string
   label: string
+  /** Any CSS colour, for example "var(--chart-other)". Defaults to the ramp colour for the series position. */
+  color?: string
 }

@@ -42,6 +42,27 @@ const flowSeries = [
   { key: 'inbound', label: 'Inbound' },
   { key: 'outbound', label: 'R&D <Lab>' },
 ]
+const poolDays = days(14).map((day, i) => ({
+  day,
+  pillars: wave(i, 500, 100, 0),
+  kept: wave(i, 300, 60, 1),
+  stakers: wave(i, 400, 80, 2),
+  sentinels: wave(i, 250, 50, 3),
+  liquidity: wave(i, 200, 40, 4),
+  bridge: wave(i, 150, 30, 5),
+  treasury: wave(i, 100, 20, 6),
+}))
+const poolSeries = [
+  { key: 'pillars', label: 'Pillars' },
+  { key: 'kept', label: 'Kept', color: 'var(--chart-other)' },
+  { key: 'stakers', label: 'Stakers' },
+  { key: 'sentinels', label: 'Sentinels' },
+  { key: 'liquidity', label: 'Liquidity' },
+  { key: 'bridge', label: 'Bridge' },
+  { key: 'treasury', label: 'Treasury' },
+]
+const netDays = days(14).map((day, i) => ({ day, net: wave(i, 0, 300, 0) }))
+const signedFormat = (v: number) => `${v < 0 ? '−' : '+'}${Math.abs(v).toLocaleString('en-US')}`
 const flowIndex = (value: string) => (value.startsWith('R&D') ? value : shortDay(value))
 
 const points = [
@@ -62,6 +83,7 @@ const points = [
   >
     <Example label="AreaChart">
       <AreaChart
+        fill
         :data="blocks"
         index="day"
         :series="[{ key: 'blocks', label: 'Blocks' }]"
@@ -72,6 +94,7 @@ const points = [
     <Example label="AreaChart stacked">
       <AreaChart
         stacked
+        fill
         :data="supply"
         index="day"
         :series="[
@@ -85,7 +108,6 @@ const points = [
 
     <Example label="AreaChart, lines only">
       <AreaChart
-        :fill="false"
         :data="emissions"
         index="day"
         :series="[
@@ -110,11 +132,39 @@ const points = [
       />
     </Example>
 
+    <Example label="BarChart stacked, more than five series">
+      <BarChart
+        stacked
+        :data="poolDays"
+        index="day"
+        :series="poolSeries"
+        :index-formatter="shortDay"
+      />
+    </Example>
+
+    <Example label="BarChart signed">
+      <BarChart
+        signed
+        :data="netDays"
+        index="day"
+        :series="[{ key: 'net', label: 'Net flow' }]"
+        :index-formatter="shortDay"
+        :value-formatter="signedFormat"
+      />
+    </Example>
+
     <Example label="DonutChart">
       <DonutChart
+        total="4,520"
+        unit="ZNN / day"
         :data="[
-          { label: 'Paid', value: 60 },
-          { label: 'Remaining', value: 40 },
+          { label: 'Pillars', value: 1728 },
+          { label: 'Sentinels', value: 864 },
+          { label: 'Stakers', value: 1036 },
+          { label: 'Liquidity', value: 432 },
+          { label: 'R&D <Lab>', value: 260 },
+          { label: 'Bridge', value: 120 },
+          { label: 'Treasury', value: 80 },
         ]"
       />
     </Example>
