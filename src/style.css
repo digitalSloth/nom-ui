@@ -47,12 +47,20 @@
     --border: hsl(0 0% 90%);
     --input: hsl(0 0% 90%);
     --ring: hsl(145 100% 42%);
-    /* Brand tri-color ramp: green → teal → blue → violet → pink */
-    --chart-1: #00D557;
-    --chart-2: #009BA1;
-    --chart-3: #0061EB;
-    --chart-4: #7C3BBD;
-    --chart-5: #F91690;
+    /* Chart series: categorical teal, violet, orange, azure, magenta; remainder; signed poles; sequential teal ramp */
+    --chart-1: #009583;
+    --chart-2: #6e44bc;
+    --chart-3: #cf630d;
+    --chart-4: #0079ba;
+    --chart-5: #c32e85;
+    --chart-other: #9dafad;
+    --chart-positive: var(--chart-1);
+    --chart-negative: var(--chart-3);
+    --chart-seq-1: #c8eee8;
+    --chart-seq-2: #80cfc3;
+    --chart-seq-3: #2eae9f;
+    --chart-seq-4: #028779;
+    --chart-seq-5: #006058;
     --sidebar: oklch(0.985 0 0);
     --sidebar-foreground: oklch(0.145 0 0);
     --sidebar-primary: oklch(0.205 0 0);
@@ -113,12 +121,20 @@
     --border: hsl(0 0% 20%);
     --input: hsl(0 0% 20%);
     --ring: hsl(145 100% 42%);
-    /* Brand tri-color ramp: green → teal → blue → violet → pink */
-    --chart-1: #00D557;
-    --chart-2: #00B4BC;
-    --chart-3: #2E84FF;
-    --chart-4: #9A5BD6;
-    --chart-5: #F91690;
+    /* Chart series: categorical teal, violet, orange, azure, magenta; remainder; signed poles; sequential teal ramp */
+    --chart-1: #00ab98;
+    --chart-2: #8a66d9;
+    --chart-3: #d67523;
+    --chart-4: #2892cf;
+    --chart-5: #d44996;
+    --chart-other: #576766;
+    --chart-positive: var(--chart-1);
+    --chart-negative: var(--chart-3);
+    --chart-seq-1: #004e47;
+    --chart-seq-2: #006e63;
+    --chart-seq-3: #008f80;
+    --chart-seq-4: #00b29e;
+    --chart-seq-5: #52d7c1;
     --sidebar: oklch(0.205 0 0);
     --sidebar-foreground: oklch(0.985 0 0);
     --sidebar-primary: oklch(0.488 0.243 264.376);
@@ -187,6 +203,14 @@
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
+  --color-chart-other: var(--chart-other);
+  --color-chart-positive: var(--chart-positive);
+  --color-chart-negative: var(--chart-negative);
+  --color-chart-seq-1: var(--chart-seq-1);
+  --color-chart-seq-2: var(--chart-seq-2);
+  --color-chart-seq-3: var(--chart-seq-3);
+  --color-chart-seq-4: var(--chart-seq-4);
+  --color-chart-seq-5: var(--chart-seq-5);
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
@@ -253,20 +277,39 @@
 [data-slot="chart"],
 [data-slot="world-map"] {
   --vis-font-family: var(--font-mono);
+  --vis-axis-tick-label-font-size: 10.5px;
   --vis-axis-tick-label-color: var(--muted-foreground);
   --vis-axis-grid-color: var(--border);
-  --vis-axis-domain-color: var(--border);
-  --vis-axis-tick-color: var(--border);
+  --vis-axis-domain-color: transparent;
+  --vis-axis-tick-color: transparent;
   --vis-tooltip-background-color: var(--popover);
   --vis-tooltip-border-color: var(--border);
   --vis-tooltip-text-color: var(--popover-foreground);
+  --vis-tooltip-border-radius: var(--radius-md);
+  --vis-tooltip-box-shadow: var(--shadow-lg);
+  --vis-tooltip-padding: 8px 10px;
   --vis-tooltip-transition-duration: 0ms;
   --vis-crosshair-line-stroke-color: var(--muted-foreground);
-  --vis-crosshair-circle-stroke-color: var(--background);
+  --vis-crosshair-line-stroke-dasharray: 2 3;
+  --vis-crosshair-circle-stroke-color: var(--card);
+  --vis-crosshair-circle-stroke-width: 2px;
+  --vis-crosshair-circle-stroke-opacity: 1;
+  /* A 2px stroke in the card colour cuts the 2px gap between stacked
+     segments, grouped bars and donut slices. Hover keeps it. */
+  --vis-stacked-bar-stroke-color: var(--card);
+  --vis-stacked-bar-stroke-width: 2px;
+  --vis-stacked-bar-hover-stroke-color: var(--card);
+  --vis-stacked-bar-hover-stroke-width: 2px;
+  --vis-grouped-bar-stroke-color: var(--card);
+  --vis-grouped-bar-stroke-width: 2px;
+  --vis-grouped-bar-hover-stroke-color: var(--card);
+  --vis-grouped-bar-hover-stroke-width: 2px;
   --vis-donut-background-color: var(--muted);
+  --vis-donut-segment-stroke-color: var(--card);
+  --vis-donut-segment-stroke-width: 2px;
   --vis-map-feature-color: var(--muted);
   --vis-map-boundary-color: var(--border);
-  --vis-map-point-default-stroke-color: var(--background);
+  --vis-map-point-default-stroke-color: var(--card);
 }
 
 [data-slot="world-map"] svg * {

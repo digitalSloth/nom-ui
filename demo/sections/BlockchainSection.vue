@@ -29,7 +29,21 @@ import Example from '../components/Example.vue'
 
 const addr = '0x71C7656EC7ab88b098defB751B7401B5f6d8976F'
 const autoLock = ref(true)
-const charts = ['chart-1', 'chart-2', 'chart-3', 'chart-4', 'chart-5']
+const charts = [
+  'bg-chart-1',
+  'bg-chart-2',
+  'bg-chart-3',
+  'bg-chart-4',
+  'bg-chart-5',
+  'bg-chart-other',
+  'bg-chart-positive',
+  'bg-chart-negative',
+  'bg-chart-seq-1',
+  'bg-chart-seq-2',
+  'bg-chart-seq-3',
+  'bg-chart-seq-4',
+  'bg-chart-seq-5',
+]
 
 const deploySteps = [
   { id: 'start', title: 'Start deploy', description: 'Published in block 4201', state: 'done' },
@@ -131,13 +145,14 @@ const sampleHex = '0x' + 'a7ffc6f8bf1ed76651c14756a061d662f580ff4de43b49fa82d80a
       </div>
     </Example>
 
-    <Example label="Chart palette (brand tri-color ramp)">
-      <div class="flex gap-2">
+    <Example label="Chart palette">
+      <div class="flex flex-wrap gap-2">
         <div
           v-for="c in charts"
           :key="c"
           class="size-12 rounded-md"
-          :style="{ backgroundColor: `var(--${c})` }"
+          :class="c"
+          :title="c.slice(3)"
         />
       </div>
     </Example>

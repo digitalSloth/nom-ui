@@ -214,8 +214,9 @@ spend your boldness there and keep the rest disciplined.
   so surfaces separate against near-black (plain drop shadows vanish there). Overlays
   (`popover` surfaces) sit one step above cards. Don't hand-roll shadows.
 - **Density:** forms stay comfortable; explorer tables use `density="compact"`.
-- **Charts:** use the brand ramp `--chart-1…5` (green → teal → blue → violet → pink) — tuned
-  for both themes. Don't pick ad-hoc chart colors.
+- **Charts:** use `--chart-1…5` in the fixed order teal, violet, orange, azure, magenta, with
+  `--chart-other` for remainders, `--chart-positive`/`--chart-negative` for signed values and
+  `--chart-seq-1…5` for magnitude. Don't pick ad-hoc chart colors.
 - **Motion:** subtle and purposeful (tab indicator, toast, spinner, the plasma hover glow).
   Respect `prefers-reduced-motion`; avoid decorative animation on financial data.
 
