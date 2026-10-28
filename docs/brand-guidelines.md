@@ -161,7 +161,10 @@ there's a primitive.**
 | A headline number on a dashboard | `StatTile` | `text-ledger` label over a large mono value |
 | App navigation on a narrow screen | `MobileNav` | Menu button that opens a sheet of links, with any link component |
 | A trend over days or epochs, or a share of a whole | AreaChart, BarChart, DonutChart | Series take `color` or the chart ramp by position; stacked charts fold past five into Other; `AreaChart` fills only with `fill`; `BarChart signed` colours by sign over a zero line; `DonutChart` shows `total` and `unit` in the centre with legend percentages; no motion |
-| Locations on a world map | WorldMap | Points in chart-1 with escaped hover labels |
+| Locations on a world map | WorldMap | Points in chart-1, or density on chart-seq-1…5 when points carry a `count`; escaped hover labels |
+| A trend inside a stat card or table cell | `Sparkline` | 1.5px line, 16% fill, no axes, hidden from screen readers; the figure beside it carries the value |
+| A share of a known total in a row or card | `Meter` | 4px bar in chart-1, or a `success`/`warning`/`destructive` health tone, beside the figure. Not `Progress`: plasma marks the main action |
+| Parts of one whole in a row or card | `SplitBar` | 10px bar of parts with 2px gaps, coloured by position or per part; name each share in text |
 
 Key props (full set in source):
 
@@ -176,6 +179,10 @@ Key props (full set in source):
 - `AreaChart` — `data`, `index`, `series` (`{ key, label, color? }`), `stacked=false`, `fill=false` (only for counts from zero), `indexFormatter`, `valueFormatter`
 - `BarChart` — `data`, `index`, `series` (`{ key, label, color? }`), `stacked=false`, `signed=false`, `indexFormatter`, `valueFormatter`
 - `DonutChart` — `data` (`{ label, value, color? }`), `total`, `unit`, `valueFormatter`
+- `WorldMap` — `points` (`latitude`, `longitude`, `label`, optional `count`)
+- `Sparkline` — `values`, `color=chart-1`; size via `class` (default 96×28)
+- `Meter` — `value`, `max=100`, `tone="default" | "success" | "warning" | "destructive"`
+- `SplitBar` — `parts` (`value`, optional `color`)
 
 ---
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { AreaChart, BarChart, DonutChart, WorldMap } from 'nom-ui'
+import { AreaChart, BarChart, DonutChart, Meter, Sparkline, SplitBar, WorldMap } from 'nom-ui'
 import Section from '../components/Section.vue'
 import Example from '../components/Example.vue'
 
@@ -22,6 +22,7 @@ const shortDay = (value: string) => {
 }
 
 const blocks = days(30).map((day, i) => ({ day, blocks: wave(i, 8000, 1500, 0) }))
+const spark = blocks.map((r) => r.blocks)
 const supply = days(30).map((day, i) => ({
   day,
   pillars: wave(i, 5000, 800, 0),
@@ -73,6 +74,7 @@ const points = [
   { latitude: -23.5, longitude: -46.6, label: 'Sao Paulo' },
   { latitude: -1.3, longitude: 36.8, label: 'R&D <Lab>' },
 ]
+const densityPoints = points.map((p, i) => ({ ...p, count: [40, 31, 23, 15, 7, 1][i] }))
 </script>
 
 <template>
@@ -173,6 +175,63 @@ const points = [
       <WorldMap :points="points" />
     </Example>
 
+    <Example label="WorldMap density">
+      <WorldMap :points="densityPoints" />
+    </Example>
+
+    <Example label="Sparkline">
+      <div class="flex flex-col gap-3">
+        <div class="flex items-center gap-4">
+          <Sparkline :values="spark" />
+          <span class="font-mono text-xs tabular-nums">8,214</span>
+        </div>
+        <div class="flex items-center gap-4">
+          <Sparkline class="h-10 w-48" color="var(--chart-2)" :values="spark" />
+          <span class="font-mono text-xs tabular-nums">stretched</span>
+        </div>
+      </div>
+    </Example>
+
+    <Example label="Meter">
+      <div class="flex flex-col gap-3">
+        <div class="flex items-center gap-4">
+          <Meter class="w-24" :value="62" />
+          <span class="font-mono text-xs tabular-nums">62%</span>
+        </div>
+        <div class="flex items-center gap-4">
+          <Meter class="w-24" tone="success" :value="98.6" />
+          <span class="font-mono text-xs tabular-nums">98.6%</span>
+        </div>
+        <div class="flex items-center gap-4">
+          <Meter class="w-24" tone="warning" :value="41" :max="60" />
+          <span class="font-mono text-xs tabular-nums">41 of 60</span>
+        </div>
+        <div class="flex items-center gap-4">
+          <Meter class="w-24" tone="destructive" :value="12" />
+          <span class="font-mono text-xs tabular-nums">12%</span>
+        </div>
+        <div class="flex items-center gap-4">
+          <Meter class="w-24" :value="150" />
+          <span class="font-mono text-xs tabular-nums">150%, clamped</span>
+        </div>
+      </div>
+    </Example>
+
+    <Example label="SplitBar">
+      <div class="flex flex-col gap-3">
+        <SplitBar class="w-48" :parts="[{ value: 60 }, { value: 40, color: 'var(--chart-other)' }]" />
+        <SplitBar
+          class="w-48"
+          :parts="[
+            { value: 50 },
+            { value: 0 },
+            { value: 30 },
+            { value: 20, color: 'var(--chart-other)' },
+          ]"
+        />
+      </div>
+    </Example>
+
     <Example label="Empty states">
       <div class="grid gap-4 sm:grid-cols-3">
         <AreaChart
@@ -187,6 +246,7 @@ const points = [
             { label: 'Remaining', value: 0 },
           ]"
         />
+        <Sparkline :values="[5]" />
       </div>
     </Example>
   </Section>
