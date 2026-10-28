@@ -229,6 +229,7 @@ const densityPoints = points.map((p, i) => ({ ...p, count: [40, 31, 23, 15, 7, 1
             { value: 20, color: 'var(--chart-other)' },
           ]"
         />
+        <SplitBar class="w-48" :parts="[{ value: 0.3 }, { value: 0.2 }]" />
       </div>
     </Example>
 

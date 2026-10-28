@@ -10,11 +10,14 @@ const props = defineProps<{
 }>()
 
 // The index is the caller's position, so colour follows the part, not its rank after filtering.
-const shown = computed(() =>
-  props.parts
+// Values become shares of the total, so the grow factors sum to 1 and the bar always fills.
+const shown = computed(() => {
+  const kept = props.parts
     .map((p, i) => ({ index: i, value: p.value, color: p.color ?? chartColor(i) }))
-    .filter((p) => p.value > 0),
-)
+    .filter((p) => p.value > 0)
+  const total = kept.reduce((sum, p) => sum + p.value, 0)
+  return kept.map((p) => ({ ...p, value: p.value / total }))
+})
 </script>
 
 <template>
