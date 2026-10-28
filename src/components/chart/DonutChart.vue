@@ -41,7 +41,10 @@ const colors = computed(() =>
   items.value.map((d, i) => d.color ?? chartColor(i)),
 )
 const value = (d: Item) => d.value
-const color = computed(() => (_: unknown, i: number) => colors.value[i])
+const color = computed(() => {
+  const list = colors.value
+  return (_: unknown, i: number) => list[i]
+})
 const percent = (v: number) =>
   formatNumber((v / sum.value) * 100, { decimals: 1 }) + "%"
 

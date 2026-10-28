@@ -50,12 +50,17 @@ const x = (_: ChartRow, i: number) => i
 const values = computed(() =>
   view.value.series.map((s) => (d: ChartRow) => Number(d[s.key])),
 )
-const color = computed(() =>
-  props.signed
-    ? (d: ChartRow, i: number) =>
-        signColor(Number(d[view.value.series[i].key]))
-    : (_: unknown, i: number) => colors.value[i],
-)
+const color = computed(() => {
+  const list = colors.value
+  const series = view.value.series
+  return props.signed
+    ? (d: ChartRow, i: number) => signColor(Number(d[series[i].key]))
+    : (_: unknown, i: number) => list[i]
+})
+const padding = computed(() => {
+  const n = view.value.data.length
+  return n > 3 ? Math.max(0, (0.28 * n - 1) / (n - 0.28)) : 0
+})
 const legend = computed(() =>
   view.value.series.map((s, i) => ({ label: s.label, color: colors.value[i] })),
 )
@@ -107,7 +112,7 @@ const template = (d: ChartRow) =>
         :y="values"
         :color="color"
         :rounded-corners="1"
-        :bar-padding="0.28"
+        :bar-padding="padding"
         :bar-style="barStyle"
         :duration="0"
       />
@@ -117,7 +122,7 @@ const template = (d: ChartRow) =>
         :y="values"
         :color="color"
         :rounded-corners="1"
-        :group-padding="0.28"
+        :group-padding="padding"
         :bar-style="barStyle"
         :duration="0"
       />

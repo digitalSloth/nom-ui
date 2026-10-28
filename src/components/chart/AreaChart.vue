@@ -51,7 +51,10 @@ const upTo = (i: number) => (d: ChartRow) =>
 
 const values = computed(() => view.value.series.map(value))
 const tops = computed(() => view.value.series.map((_, i) => upTo(i)))
-const color = computed(() => (_: unknown, i: number) => colors.value[i])
+const color = computed(() => {
+  const list = colors.value
+  return (_: unknown, i: number) => list[i]
+})
 const legend = computed(() =>
   view.value.series.map((s, i) => ({ label: s.label, color: colors.value[i] })),
 )
