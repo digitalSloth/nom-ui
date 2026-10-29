@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import type {HTMLAttributes} from "vue"
 import {computed} from "vue"
-import {ArrowDownLeftIcon, ArrowUpRightIcon} from "@lucide/vue"
+import {ArrowDownLeftIcon, ArrowRightIcon, ArrowUpRightIcon} from "@lucide/vue"
 import {cn} from "nom-ui/lib/utils"
 import type {BadgeVariants} from "../badge"
 import {Badge} from "../badge"
 
-type Direction = "in" | "out"
+type Direction = "in" | "out" | "self"
 
 const props = defineProps<{
   direction: Direction
@@ -23,6 +23,7 @@ const config = {
     label: "Out",
     extra: "border-transparent bg-muted text-muted-foreground",
   },
+  self: {variant: "outline" as BadgeVariants["variant"], label: "Self", extra: "text-muted-foreground"},
 } satisfies Record<Direction, {variant: BadgeVariants["variant"]; label: string; extra: string}>
 
 const current = computed(() => config[props.direction])
@@ -31,6 +32,7 @@ const current = computed(() => config[props.direction])
 <template>
   <Badge :variant="current.variant" :class="cn(current.extra, props.class)">
     <ArrowDownLeftIcon v-if="direction === 'in'" />
+    <ArrowRightIcon v-else-if="direction === 'self'" />
     <ArrowUpRightIcon v-else />
     {{ label ?? current.label }}
   </Badge>

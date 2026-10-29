@@ -307,8 +307,8 @@
   --vis-donut-background-color: var(--muted);
   --vis-donut-segment-stroke-color: var(--card);
   --vis-donut-segment-stroke-width: 2px;
-  --vis-map-feature-color: var(--muted);
-  --vis-map-boundary-color: var(--border);
+  --vis-map-feature-color: var(--map-land, var(--muted));
+  --vis-map-boundary-color: var(--map-boundary, var(--border));
   --vis-map-point-default-stroke-color: var(--card);
 }
 

@@ -154,6 +154,27 @@ const txns = [
       </div>
     </Example>
 
+    <Example label="Table — sticky header, revealed copy buttons">
+      <div class="max-h-64 w-full overflow-auto rounded-lg border [&>[data-slot=table-container]]:overflow-visible">
+        <Table>
+          <TableHeader sticky>
+            <TableRow>
+              <TableHead>Transaction</TableHead>
+              <TableHead class="text-right">Amount</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow v-for="(tx, i) in [...txns, ...txns, ...txns]" :key="i">
+              <TableCell><Address :address="tx.hash" copy-reveal /></TableCell>
+              <TableCell class="text-right">
+                <Amount :value="tx.amount" symbol="ZNN" class="items-end" />
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </div>
+    </Example>
+
     <Example label="Tabs — default (sliding indicator)">
       <Tabs default-value="account" class="w-full max-w-md">
         <TabsList>

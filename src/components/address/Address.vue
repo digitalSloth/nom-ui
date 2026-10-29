@@ -23,6 +23,8 @@ const props = withDefaults(defineProps<{
   wrap?: boolean
   /** Show the inline copy button. */
   copy?: boolean
+  /** Show the copy button only on row hover or focus (always on touch). */
+  copyReveal?: boolean
   /** Reveal the full value in a tooltip on hover. */
   tooltip?: boolean
   /** Explorer URL — renders the value as a link when set. */
@@ -97,6 +99,6 @@ const valueAttrs = computed(() =>
     </TooltipProvider>
     <component :is="valueTag" v-else v-bind="valueAttrs" :class="valueClass">{{ display }}</component>
 
-    <CopyButton v-if="copy" :value="address" size="icon-sm" class="size-7" />
+    <CopyButton v-if="copy" :value="address" size="icon-sm" :reveal="copyReveal" class="size-7" />
   </span>
 </template>

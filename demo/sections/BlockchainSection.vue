@@ -81,6 +81,17 @@ const sampleHex = '0x' + 'a7ffc6f8bf1ed76651c14756a061d662f580ff4de43b49fa82d80a
       </div>
     </Example>
 
+    <Example label="Amount — signed, exact, symbol slot">
+      <div class="flex flex-col gap-3">
+        <Amount value="1" sign="+" symbol="ZNN" />
+        <Amount value="1.123456789012345678" :decimals="18" sign="-">
+          <template #symbol>
+            <a href="#" class="hover:text-link hover:underline">ZNN</a>
+          </template>
+        </Amount>
+      </div>
+    </Example>
+
     <Example label="Amount — compact notation (≥ 10,000)">
       <div class="flex flex-col gap-3">
         <Amount :value="42500" symbol="ZNN" compact />
@@ -104,6 +115,7 @@ const sampleHex = '0x' + 'a7ffc6f8bf1ed76651c14756a061d662f580ff4de43b49fa82d80a
     <Example label="Transaction direction">
       <TxDirection direction="in" />
       <TxDirection direction="out" />
+      <TxDirection direction="self" />
       <TxDirection direction="in" label="Received" />
       <TxDirection direction="out" label="Sent" />
     </Example>

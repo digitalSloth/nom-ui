@@ -105,7 +105,7 @@ import { Address, Amount, TxStatus, TxDirection, TokenIcon } from 'nom-ui'
   <Amount :value="12408.50319" symbol="ZNN" fiat="≈ $9,420.18" />
 
   <TxStatus status="pending" />     <!-- pending | confirming | success | failed -->
-  <TxDirection direction="in" />    <!-- in | out -->
+  <TxDirection direction="in" />    <!-- in | out | self -->
   <TokenIcon symbol="ZNN" :src="logoUrl" />
 </template>
 ```

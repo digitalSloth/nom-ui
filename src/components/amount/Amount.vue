@@ -17,6 +17,8 @@ const props = withDefaults(defineProps<{
   compact?: boolean
   /** Locale for number formatting. */
   locale?: string
+  /** Prefix for a signed amount. `-` renders as U+2212 MINUS SIGN. */
+  sign?: "+" | "-"
   /** Optional secondary line, already formatted (e.g. "≈ $1,240.85"). */
   fiat?: string
   class?: HTMLAttributes["class"]
@@ -39,7 +41,7 @@ const parts = computed(() => {
   const formatted = new Intl.NumberFormat(props.locale, {
     minimumFractionDigits: props.decimals,
     maximumFractionDigits: props.decimals,
-  }).format(n)
+  }).format(typeof props.value === "string" ? (props.value as Intl.StringNumericLiteral) : n)
 
   if (!props.dimTrailingZeros || !formatted.includes(".")) {
     return {significant: formatted, zeros: ""}
@@ -62,13 +64,13 @@ const parts = computed(() => {
 
 <template>
   <span :class="cn('inline-flex flex-col', props.class)">
-    <span class="font-mono tabular-nums"><span>{{ parts.significant }}</span><span
+    <span class="font-mono tabular-nums">{{ sign === "-" ? "\u2212" : sign }}<span>{{ parts.significant }}</span><span
       v-if="parts.zeros"
       class="text-muted-foreground/60"
     >{{ parts.zeros }}</span><span
-      v-if="symbol"
+      v-if="symbol || $slots.symbol"
       class="ml-1 text-muted-foreground"
-    >{{ symbol }}</span></span>
+    ><slot name="symbol">{{ symbol }}</slot></span></span>
     <span v-if="fiat" class="font-mono text-xs tabular-nums text-muted-foreground">{{ fiat }}</span>
   </span>
 </template>
